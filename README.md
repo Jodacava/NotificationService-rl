@@ -2,7 +2,6 @@
 Rate limiting notifications service
 
 The Task:
-
 // [Backend] Rate-Limited Notification Service
 // We have a Notification system that sends out email notifications of various types
 // (status update, daily news, project invitations, etc). We need to protect recipients from getting
@@ -60,3 +59,11 @@ The Task:
 // System.out.println("sending message to user " + userId);
 // }
 // }
+
+For execution:
+- Is necessary to create an environment DB_POSTGRES_CONNECTION for the DB string connection, f.e.:
+  DB_POSTGRES_CONNECTION=postgres://postgres:!afR$4#54CG6*D@localhost:5432/postgres?sslmode\=disable
+- After setting this environment you must run the m1.sql migration, and you could modify the m2.sql for different
+  testing purposes.
+- You can modify the main.go file for adding new test data.
+- When you want to run the project just typing "go build main" at the terminal.

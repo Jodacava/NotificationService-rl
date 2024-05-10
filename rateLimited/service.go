@@ -32,16 +32,17 @@ func (n NotificationService) Send(typeStr, userEmail, message string) {
 	}
 	lastNotificationTime, errTime := time.Parse(time.RFC3339, lastNotification)
 	if errTime != nil {
-		fmt.Println("error parsing last notification. Err: ", errTime.Error())
-		return
+		lastNotificationTime = actualTime
 	}
 	if attempt != 0 || !n.ApplyValidations(attempt, maxShipments, timeRule, actualTime, lastNotificationTime) {
+		errMessage := fmt.Sprintf("Rule -> type: %s, max shipments: %v, time shipment: %s", typeStr, maxShipments, timeRule)
+		fmt.Println(errMessage)
 		fmt.Println("error validating last notification. Attempt: ", attempt, " Last Notification: ", lastNotification)
 		n.repo.SaveAttempt(NotificationAttempt{
 			EmailRecipient:   userEmail,
 			TypeId:           typeStr,
 			ShipmentCount:    0,
-			LastNotification: actualTime.String(),
+			LastNotification: time.Time{}.String(),
 		})
 		return
 	}

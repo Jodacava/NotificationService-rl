@@ -25,8 +25,8 @@ type RateLimitRule struct {
 }
 
 type NotificationAttempt struct {
-	EmailRecipient   string `gorm:"column:email_recipient" json:"email_recipient"`
-	TypeId           string `gorm:"column:type_id" json:"type_id"`
+	EmailRecipient   string `gorm:"primary_key;column:email_recipient" json:"email_recipient"`
+	TypeId           string `gorm:"primary_key;column:type_id" json:"type_id"`
 	ShipmentCount    int    `gorm:"column:shipment_count" json:"shipment_count"`
 	LastNotification string `gorm:"column:last_notification" json:"last_notification"`
 }
@@ -48,7 +48,7 @@ func NewRepository(dbRepo postgres.DbRepositoryBase) RepositoryInterface {
 }
 
 func (r Repository) SaveAttempt(data NotificationAttempt) error {
-	return r.dbRepo.Save(data)
+	return r.dbRepo.Save(&data)
 }
 
 func (r Repository) GetAttempt(emailRecipient, typeId string) (int, string) {

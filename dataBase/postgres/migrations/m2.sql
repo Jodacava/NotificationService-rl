@@ -1,23 +1,11 @@
-INSERT INTO rate_limit_rule (rl_rule_id, max_shipments, time_shipment)
-VALUES (1, 5, 'W');
+insert into rate_limit_rule (rl_rule_id, max_shipments, time_shipment, type_id)
+values  (3, 12, 'Y', 'invitation'),
+        (4, 2, 'h', 'news'),
+        (2, 3, 'M', 'marketing'),
+        (1, 5, 'W', 'status'),
+        (5, 1, 'm', 'position');
 
-INSERT INTO rate_limit_rule (rl_rule_id, max_shipments, time_shipment)
-VALUES (2, 3, 'M');
-
-INSERT INTO rate_limit_rule (rl_rule_id, max_shipments, time_shipment)
-VALUES (3, 12, 'Y');
-
-INSERT INTO rate_limit_rule (rl_rule_id, max_shipments, time_shipment)
-VALUES (4, 2, 'h');
-
-INSERT INTO rate_limit_rule (rl_rule_id, max_shipments, time_shipment)
-VALUES (5, 1, 'm');
-
-INSERT INTO type_notification (type_id, rl_rule_id)
-VALUES ('status', 2);
-
-INSERT INTO type_notification (type_id, rl_rule_id)
-VALUES ('news', 4);
-
-INSERT INTO type_notification (type_id, rl_rule_id)
-VALUES ('marketing', 3);
+insert into type_notification (type_id, rl_rule_id)
+values  ('status', 2),
+        ('news', 4),
+        ('marketing', 3);

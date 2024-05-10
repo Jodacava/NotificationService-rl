@@ -1,11 +1,20 @@
 package main
 
 import (
-	"rateLimited"
+	"NotificationService-rl/dataBase/postgres"
+	"NotificationService-rl/gateway"
+	"NotificationService-rl/rateLimited"
+	"log"
 )
 
 func main() {
-	service := rateLimited.NewNotificationServiceImpl(Gateway{})
+	dbClient, dbErr := postgres.NewPostgres()
+	if dbErr != nil {
+		log.Panic(dbErr)
+	}
+	dbRepository := postgres.NewDbPRepository(dbClient)
+	repositoryImp := rateLimited.NewRepository(dbRepository)
+	service := rateLimited.NewNotificationServiceImpl(gateway.Gateway{}, repositoryImp)
 	service.Send("news", "user", "news 1")
 	service.Send("news", "user", "news 2")
 	service.Send("news", "user", "news 3")

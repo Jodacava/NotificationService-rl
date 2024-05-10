@@ -58,7 +58,6 @@ The Task:
 // void send(String userId, String message) {
 // System.out.println("sending message to user " + userId);
 // }
-// }
 
 For execution:
 - Is necessary to create an environment DB_POSTGRES_CONNECTION for the DB string connection, f.e.:
